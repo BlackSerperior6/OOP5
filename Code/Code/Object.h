@@ -6,7 +6,6 @@ using namespace std;
 class Object
 {
 public:
-
 	Object(){}
 
 	~Object(){}
