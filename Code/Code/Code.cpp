@@ -1,5 +1,4 @@
 ﻿#include "Vector.h"
-#include "Student.h"
 
 int main()
 {
@@ -7,6 +6,7 @@ int main()
 
 	int Lenght;
 
+	//Вводим длинну вектора
 	do
 	{
 		cout << "Введите размер вектора" << endl;
@@ -14,9 +14,9 @@ int main()
 	} 
 	while (Lenght <= 0);
 
-	Vector vector(Lenght);
+	Vector vector(Lenght); //Создаем вектор
 
-	cin >> vector;
+	cin >> vector; //Вводим данные
 
-	cout << vector << endl;
+	cout << vector << endl; //Выводим
 }

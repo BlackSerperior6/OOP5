@@ -1,12 +1,11 @@
 #pragma once
-#include "Object.h"
 #include "Student.h"
 
-class Vector
+class Vector //Класс вектора
 {
 public:
 
-	Vector(int lenght)
+	Vector(int lenght) //Конструктор с параметрами
 	{
 		elements = new Object* [lenght];
 
@@ -14,7 +13,7 @@ public:
 		cur_Lenght = 0;
 	}
 
-	~Vector()
+	~Vector() //Диструктор
 	{
 		if (elements == 0)
 			return;
@@ -28,7 +27,7 @@ public:
 		cur_Lenght = 0;
 	}
 
-	bool TryAdd(Object* element) 
+	bool TryAdd(Object* element)  //Метод для добавки элемента в вектор
 	{
 		if (cur_Lenght >= Lenght)
 			return false;
@@ -38,35 +37,36 @@ public:
 		return true;
 	}
 
+	//Дружественные функции ввода и вывода
 	friend ostream& operator<<(ostream& stream, Vector& vector);
-
 	friend istream& operator>>(istream& stream, Vector& vector);
 
 private:
-
-	Object** elements;
-	int Lenght;
-	int cur_Lenght;
+	Object** elements; //Сам массив элементов
+	int Lenght; //Максимальная длина вектора
+	int cur_Lenght; //Текущая длина вектора
 };
 
+//Перегрузка оператора ввода через потоки
 ostream& operator<<(ostream& stream, Vector& vector)
 {
 	stream << "Содержимое вектора:" << endl;
 
-	if (vector.cur_Lenght <= 0)
-		return stream;
-	
-	vector.elements[0]->Show(stream);
-
-	for (int i = 1; i < vector.cur_Lenght; i++)
+	if (vector.cur_Lenght > 0)
 	{
-		cout << endl;
-		vector.elements[i]->Show(stream);
+		vector.elements[0]->Show(stream);
+
+		for (int i = 1; i < vector.cur_Lenght; i++)
+		{
+			cout << endl;
+			vector.elements[i]->Show(stream);
+		}
 	}
 
 	return stream;	
 }
 
+//Перегрузка оператора вывода через потоки
 istream& operator>>(istream& stream, Vector& vector)
 {
 	cout << "Вводите содержимое вектора по элементно" << endl;
@@ -75,7 +75,7 @@ istream& operator>>(istream& stream, Vector& vector)
 	{
 		stream.ignore();
 
-		if (i % 2 == 0)
+		if (i % 2 == 0) //По очередно вводится либо человек, либо студент
 		{
 			Person* person = new Person;
 			person->Fill(stream);
@@ -93,4 +93,3 @@ istream& operator>>(istream& stream, Vector& vector)
 
 	return stream;
 }
-
